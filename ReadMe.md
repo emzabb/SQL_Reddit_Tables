@@ -36,4 +36,195 @@ The primary goal of this project is to extract valuable insights from the provid
 
 As I embark on this project, I'll ensure that I maintain a structured approach to data analysis, with well-documented work and clear presentation of findings to convey the story within the data.
 
-*Project completed in markdown by [Your Name].*
+### Here is my result:
+
+
+
+  
+
+    -- 1
+    
+    -- Let’s start by examining the three tables.
+    
+    SELECT *
+    
+    FROM users
+    
+    LIMIT  5;
+    
+      
+    
+    SELECT *
+    
+    FROM posts
+    
+    LIMIT  5;
+    
+      
+    
+    SELECT *
+    
+    FROM subreddits
+    
+    LIMIT  5;
+    
+      
+    
+    -- 2
+    
+    -- Identify primary keys in each table. Are there any foreign keys?
+    
+    SELECT id
+    
+    FROM users;
+    
+      
+    
+    SELECT id, user_id, subreddit_id
+    
+    FROM posts;
+    
+      
+    
+    SELECT id FROM subreddits;
+    
+      
+    
+    -- 3
+    
+    -- Write a query to count how many different subreddits there are.
+    
+    SELECT  COUNT(*)  AS  'subreddit_count'
+    
+    FROM subreddits;
+    
+      
+    
+    -- 4
+    
+    -- Write a few more queries to figure out the following information:
+    
+    -- What user has the highest score?
+    
+    -- What post has the highest score?
+    
+    -- What are the top 5 subreddits with the highest subscriber_count?
+    
+      
+    
+    SELECT id, username, MAX(score)  AS  'highest_score'
+    
+    FROM users;
+    
+      
+    
+    SELECT id, title, MAX(score)  AS  'highest_score'
+    
+    FROM posts;
+    
+      
+    
+    SELECT id, name, subscriber_count
+    
+    FROM subreddits
+    
+    ORDER  BY subscriber_count DESC
+    
+    LIMIT  5;
+    
+      
+    
+    -- 5
+    
+    -- Join users and posts tables to find out how many posts each user has made.
+    
+    SELECT users.username, COUNT(*)  AS  'number_of_posts'
+    
+    FROM users
+    
+    LEFT  JOIN posts
+    
+    ON users.id = posts.user_id
+    
+    GROUP  BY users.id
+    
+    ORDER  BY  2  DESC;
+    
+      
+    
+    -- 6
+    
+    -- Over time, posts may be removed and users might delete their accounts.We only want to see existing posts where the users are still active.
+    
+    SELECT *
+    
+    FROM posts
+    
+    INNER  JOIN users
+    
+    ON posts.user_id = users.id;
+    
+      
+    
+    -- 7
+    
+    -- Some new posts have been added to Reddit! Stack the new posts2 table under the existing posts table to see them.
+    
+    SELECT *
+    
+    FROM posts
+    
+    UNION
+    
+    SELECT *
+    
+    FROM posts2;
+    
+      
+    
+    -- 8
+    
+    -- Find the most popular post in a subreddit (posts with a score of 5000 or more).
+    
+    WITH popular_posts AS  (
+    
+    SELECT *
+    
+    FROM posts
+    
+    WHERE score >= 5000
+    
+    )
+    
+    SELECT subreddits.name, popular_posts.title , popular_posts.score
+    
+    FROM subreddits
+    
+    INNER  JOIN popular_posts
+    
+    ON subreddits.id = popular_posts.subreddit_id
+    
+    GROUP  BY subreddits.name
+    
+    ORDER  BY popular_posts.score DESC;
+    
+      
+    
+    -- 9
+    
+    -- Write a query to calculate the average score of all the posts for each subreddit.
+    
+    SELECT subreddits.name,
+    
+    ROUND(AVG(posts.score), 2)  AS  'average_socre'
+    
+    FROM subreddits
+    
+    INNER  JOIN posts
+    
+    ON subreddits.id = posts.subreddit_id
+    
+    GROUP  BY  1
+    
+    ORDER  BY  2  DESC;
+
