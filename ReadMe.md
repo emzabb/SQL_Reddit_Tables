@@ -1,3 +1,4 @@
+
 # Project Description
 
 ## Introduction
@@ -8,35 +9,20 @@ In this project, I'll take on the role of a Data Analyst tasked with analyzing f
 
 For this task, I have access to three key data tables:
 
-1. **Users Table:** This table contains information about the platform's users, including data such as usernames, user IDs, registration details, and potentially more user profile information.
+1. **Users Table:** id, username, email, join_date, score
 
-2. **Posts Table:** The posts table provides data related to the posts created on Reddit, encompassing information about the posts themselves, such as content type, post IDs, creation dates, and interaction metrics like upvotes and downvotes.
+2. **Posts Table:** id, title, user_id, subreddit_id, score, created_date
 
-3. **Subreddits Table:** This table offers insights into the subreddits, or communities, present on Reddit, including details about subreddit names, topics, and potentially metadata about each community.
+3. **Subreddits Table:** id, name, created_date, subscriber_count
 
-## Project Tasks
-
-My role as a Data Analyst will involve a series of tasks related to data exploration, analysis, and the generation of insights from this Reddit data. These tasks may include:
-
-- **Data Cleaning:** Cleaning and preparing the data for analysis, addressing missing values, and handling data inconsistencies.
-
-- **Exploratory Data Analysis (EDA):** Conducting EDA to understand the distribution of key variables, identifying trends or patterns in user behavior, post engagement, and subreddit popularity.
-
-- **Data Visualization:** Creating data visualizations such as charts and graphs to present key findings in a visually appealing manner.
-
-- **Descriptive Analysis:** Generating summary statistics and insights about user behavior, popular subreddits, or trends over time.
-
-- **Hypothesis Testing:** Formulating and testing hypotheses to answer specific questions or explore relationships within the data.
-
-- **Reporting and Presentation:** Preparing reports or presentations summarizing findings and recommendations, and effectively communicating these to relevant stakeholders.
 
 ## Project Goals
 
-The primary goal of this project is to extract valuable insights from the provided data. These insights will help in understanding user interactions, subreddit preferences, or any other patterns that may be present in the Reddit community. The analysis conducted here will inform decision-making and potentially guide strategic actions within this fictional Reddit environment.
+The primary goal of this project is to extract valuable insights from the provided data. These insights will help in understanding user interactions, subreddit preferences, or any other patterns that may be present in the Reddit community. 
 
 As I embark on this project, I'll ensure that I maintain a structured approach to data analysis, with well-documented work and clear presentation of findings to convey the story within the data.
 
-### Here is my result:
+### My work:
 
 
 
@@ -68,8 +54,10 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     
     LIMIT  5;
     
-      
-    
+### tables previews
+![enter image description here](https://i.ibb.co/D4PsjcG/1.png)
+
+
     -- 2
     
     -- Identify primary keys in each table. Are there any foreign keys?
@@ -97,6 +85,8 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     SELECT  COUNT(*)  AS  'subreddit_count'
     
     FROM subreddits;
+### subreddit count
+![enter image description here](https://i.ibb.co/L8ScyWy/subred-count.png)
     
       
     
@@ -131,6 +121,8 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     ORDER  BY subscriber_count DESC
     
     LIMIT  5;
+### results
+![enter image description here](https://i.ibb.co/Gp2ZLzK/user-score-post-score-subred-subs.png)
     
       
     
@@ -149,6 +141,8 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     GROUP  BY users.id
     
     ORDER  BY  2  DESC;
+### top 10 users w/ most posts
+![enter image description here](https://i.ibb.co/vc2bfxg/users-most-posts.png)
     
       
     
@@ -207,6 +201,8 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     GROUP  BY subreddits.name
     
     ORDER  BY popular_posts.score DESC;
+### top 5 most popular posts
+![enter image description here](https://i.ibb.co/KXHkHfw/highest-post-scores.png)
     
       
     
@@ -227,4 +223,10 @@ As I embark on this project, I'll ensure that I maintain a structured approach t
     GROUP  BY  1
     
     ORDER  BY  2  DESC;
+### results
+![enter image description here](https://i.ibb.co/dtzh7Wt/avg-score-subred.png)
+
+
+In conclusion, this project has allowed for a deep dive into the world of Reddit, providing insights into user behavior, content engagement, and subreddit preferences.
+
 
